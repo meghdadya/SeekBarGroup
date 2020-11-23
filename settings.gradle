@@ -1,0 +1,3 @@
+include ':seekbargroup'
+include ':app'
+rootProject.name = "SeekBarGroup"
