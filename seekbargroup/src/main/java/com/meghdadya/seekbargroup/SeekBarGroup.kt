@@ -8,10 +8,10 @@ import androidx.core.view.children
 
 
 class SeekBarGroup @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
-    defStyleRes: Int = 0
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0,
+        defStyleRes: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr, defStyleRes), SeekBar.OnSeekBarChangeListener {
     private var mTotalPercentage = 100
 
@@ -36,14 +36,13 @@ class SeekBarGroup @JvmOverloads constructor(
     }
 
     private fun setPriceTemplateValue(seekBar: SeekBar) {
-        val itemIndex = children.indexOf(seekBar)
         children.forEachIndexed { index, view ->
-            if (index > 0) {
-                val preItem = children.elementAt(itemIndex - index) as SeekBar
+            if (childCount > 1) {
+                val preItem = children.elementAt((childCount - 1) - index) as SeekBar
                 if (preItem.progress > 1) {
                     preItem.progress = preItem.progress - 1
                     seekBar.progress = 1
-                    return@forEachIndexed
+                    return
                 }
             } else {
                 seekBar.progress = mTotalPercentage
